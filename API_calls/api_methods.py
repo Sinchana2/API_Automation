@@ -1,10 +1,10 @@
 import requests
 import json
 import pytest
-
+from Utilities.customLogger import LogGen
 class api_test():
 
-
+    _log= LogGen()
 
     def get_token(self,url):
         data ={ 'username': 'admin', 'password': 'password123'}
@@ -32,7 +32,7 @@ class api_test():
 
         else:
             print('Response code is "{}". Get method failed on execution'.format(_resFail))
-
+            self._log.loggen()
 
     def create_resources(self,url,kwargs):
         _resPass = '200'
@@ -49,6 +49,7 @@ class api_test():
             if _resPass in str(respStatus.status_code):
                 print('Response code is {}. Post method successfully executed'.format(_resPass))
                 print('Json response is "{}"'.format(restext))
+                self._log.loggen()
 
             else:
                 print('Response code is "{}". Post method failed on execution'.format(_resFail))
@@ -69,7 +70,7 @@ class api_test():
         if _resPass in str(respStatus.status_code):
             print('Response code is {}. Post method successfully executed'.format(_resPass))
             print('Json response is "{}"'.format(restext))
-
+            self._log.loggen()
         else:
             print('Response code is "{}". Post method failed on execution'.format(_resFail))
 
